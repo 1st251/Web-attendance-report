@@ -87,14 +87,9 @@ public class TimeTableController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         int lid = Integer.parseInt(request.getParameter("lid"));
-//        Date from = Date.valueOf(request.getParameter("from"));
-//        Date to = Date.valueOf(request.getParameter("to"));
         String year_raw = request.getParameter("year");
         String week_raw=request.getParameter("week");
         Date from, to;
-        if(week_raw == null){
-            
-        }
         String[] week_list= week_raw.split(" to ");
         from = Date.valueOf(year_raw+"-"+week_list[0]);
         to = Date.valueOf(year_raw+"-"+week_list[1]);

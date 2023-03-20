@@ -4,32 +4,22 @@
  */
 package model;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author admin
  */
-public class Lecturer_User {
-    private int luid;
+public class Student_User {
+    private int suid;
     private String username;
     private String password;
-    Lecturer lecturer;  
+    Student student;
 
-    public Lecturer getLecturer() {
-        return lecturer;
+    public int getSuid() {
+        return suid;
     }
 
-    public void setLecturer(Lecturer lecturer) {
-        this.lecturer = lecturer;
-    }
-
-    public int getLuid() {
-        return luid;
-    }
-
-    public void setLuid(int luid) {
-        this.luid = luid;
+    public void setSuid(int suid) {
+        this.suid = suid;
     }
 
     public String getUsername() {
@@ -48,7 +38,11 @@ public class Lecturer_User {
         this.password = password;
     }
 
-    
-    
-    
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 }

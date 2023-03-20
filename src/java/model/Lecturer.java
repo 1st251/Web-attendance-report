@@ -15,6 +15,15 @@ public class Lecturer {
     private String lname;
     private ArrayList<Group> group = new ArrayList<>();
     private ArrayList<Session> session = new ArrayList<>();
+    Lecturer_User user;
+
+    public Lecturer_User getUser() {
+        return user;
+    }
+
+    public void setUser(Lecturer_User user) {
+        this.user = user;
+    }
 
     public ArrayList<Session> getSession() {
         return session;

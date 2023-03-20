@@ -17,6 +17,15 @@ public class Student {
     private Date dob;
     private ArrayList<Group> group = new ArrayList<>();
     private ArrayList<Attendance> attendance = new ArrayList<>();
+    Student_User user;
+
+    public Student_User getUser() {
+        return user;
+    }
+
+    public void setUser(Student_User user) {
+        this.user = user;
+    }
 
     public ArrayList<Attendance> getAttendance() {
         return attendance;

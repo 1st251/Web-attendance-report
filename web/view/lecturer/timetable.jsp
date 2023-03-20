@@ -34,8 +34,7 @@
                             </c:forEach>
                         </select>
                             
-                        <input type="text" name="lid" value="${requestScope.lid}">
-                        <button>Submit</button>
+                        <input type="hidden" name="lid" value="${sessionScope.acc.lecturer.lid}">
                     </form>
                 <c:forEach items="${requestScope.dates}" var="d">
                     <td> 

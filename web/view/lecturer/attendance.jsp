@@ -50,7 +50,7 @@
                     </c:forEach>
                 </tbody>
             </table>
-<!--            <div>ABSENT: ${requestScope.absent} ABSENT SO FAR (${requestScope.count} ABSENT ON ${requestScope.countSes} Total)
+   <!--         <div>ABSENT: ${requestScope.absent} ABSENT SO FAR (${requestScope.count} ABSENT ON ${requestScope.countSes} Total)
                 </div>-->
     </body>
 </html>

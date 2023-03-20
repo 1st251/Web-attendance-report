@@ -87,7 +87,11 @@ public class LecturerDBContext extends DBContext<Lecturer>{
         System.out.println(sessions.size());
         return sessions;
     }
-
+//    public LecturerDBContext getUser (){
+//        String sql ="";
+//        PreparedStatement stm = null;
+//        ResultSet rs = null;
+//    }
     @Override
     public void insert(Lecturer model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

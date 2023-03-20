@@ -38,8 +38,8 @@
                         <button>Submit</button>
                     </form>
                 <c:forEach items="${requestScope.dates}" var="d">
-                    <td>${d} <br/>
-                    <fmt:formatDate value="${d}" pattern="EEEE" />
+                    <td> 
+                    <fmt:formatDate value="${d}" pattern="EEEE dd/MM"/>
                     </td>
                 </c:forEach>
 

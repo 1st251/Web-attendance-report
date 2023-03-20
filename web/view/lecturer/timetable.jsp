@@ -18,16 +18,16 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
         ${requestScope.fromYear}
         <table border="1px">
             <tr>
                 <td>
                     <form method="post" action="timetable">
-                        <select name="year" onchange="this.form.submit()">
+                        ${sessionScopeScope.user.luid} Year <select name="year" onchange="this.form.submit()">
                             <option value="2023" <c:if test="${2023 eq requestScope.year}">selected</c:if>>2023</option>
                             <option value="2022" <c:if test="${2022 eq requestScope.year}">selected</c:if>>2022</option>
                         </select>
+                        <br>week  
                         <select name="week" onchange="this.form.submit()">
                             <c:forEach items="${requestScope.weeks}" var="w">
                                 <option value="${w}"  <c:if test="${w eq requestScope.fromto}">selected</c:if> >${w}</option>
@@ -37,13 +37,12 @@
                         <input type="text" name="lid" value="${requestScope.lid}">
                         <button>Submit</button>
                     </form>
-                </td>
                 <c:forEach items="${requestScope.dates}" var="d">
                     <td>${d} <br/>
                     <fmt:formatDate value="${d}" pattern="EEEE" />
-                    
                     </td>
                 </c:forEach>
+
             <tr/>
             <c:forEach items="${requestScope.slots}" var="s">
                 <tr>
@@ -51,13 +50,13 @@
                     <c:forEach items="${requestScope.dates}" var="d">
                         <td>
                             <c:forEach items="${requestScope.sessions}" var="ses">
-                                <c:if test="${ses.slot.id eq s.id and ses.date eq d}">
-                                    ${ses.group.name}-${ses.group.course.name} <br/>
-                                    ${ses.room.name} 
+                                <c:if test="${ses.timeslot.tid eq s.tid and ses.date eq d}">
+                                    ${ses.group.gname}-${ses.group.course.cname} <br/>
+                                    ${ses.room.rname} 
                                     -
                                     <c:if test="${ses.status}">-(attended)</c:if>
                                     <c:if test="${!ses.status}">-
-                                        <a href="takeattend?id=${ses.id}">take attend</a>
+                                        <a href="takeattend?id=${ses.sesid}">take attend</a>
                                     </c:if>
                                 </c:if>
                             </c:forEach>

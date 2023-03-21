@@ -6,11 +6,15 @@
     </filter>
     <filter-mapping>
         <filter-name>loginfilter</filter-name>
-        <url-pattern>/lecturer/timtable</url-pattern>
+        <url-pattern>/lecturer/timetable</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>loginfilter</filter-name>
         <url-pattern>/lecturer/attendance</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>loginfilter</filter-name>
+        <url-pattern>/lecturer/takeattend</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>LecturerTimeTable</servlet-name>
@@ -28,6 +32,10 @@
         <servlet-name>Menu</servlet-name>
         <jsp-file>/view/menu.jsp</jsp-file>
     </servlet>
+    <servlet>
+        <servlet-name>TakeAttendance</servlet-name>
+        <servlet-class>controller.lecturer.TakeAttendanceController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LecturerTimeTable</servlet-name>
         <url-pattern>/lecturer/timetable</url-pattern>
@@ -43,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>LecturerAttendace</servlet-name>
         <url-pattern>/lecturer/attendance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TakeAttendance</servlet-name>
+        <url-pattern>/lecturer/takeattend</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

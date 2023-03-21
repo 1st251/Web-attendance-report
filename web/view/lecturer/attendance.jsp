@@ -18,10 +18,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="attendance" method="POST">
+<!--        <input type="hidden" name="lid" value="${sessionScope.acc.lecturer.lid}">-->
+<!--       <form action="attendance" method="POST">
             <input type="text" name="lid" value="${requestScope.lid}">
             <input type="submit" name="Show"> 
-        </form>
+        </form>-->
             <table border="1" >
                 <thead>
                     <tr>

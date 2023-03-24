@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Lecturer;
 import model.Lecturer_User;
+import model.Student;
 import model.Student_User;
 import org.apache.catalina.User;
 
@@ -58,42 +59,7 @@ public class UserDBContext extends DBContext<Lecturer>{
         }
         return null;
     }
-    public Student_User getsu (String username, String password) {
-        String sql = "SELECT su.suid,su.username,su.password,s.sid,s.sname \n"
-                + "FROM Student_User su inner join Student s on s.sid=su.sid\n"
-                + "WHERE username = ? AND [password] = ?";
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        try {
-            
-            stm = connection.prepareStatement(sql);
-            stm.setString(1, username);
-            stm.setString(2, password);
-            rs = stm.executeQuery();
-            while(rs.next())
-            {
-                Student_User s = new Student_User();
-                s.setSuid(rs.getInt("luid"));
-                s.setUsername(rs.getString("username"));
-                s.setPassword(rs.getString("password"));
-                Lecturer l = new Lecturer();
-                l.setLid(rs.getInt("lid"));
-                
-                return s;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                rs.close();
-                stm.close();
-                connection.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return null;
-    }
+   
     @Override
     public void insert(Lecturer model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

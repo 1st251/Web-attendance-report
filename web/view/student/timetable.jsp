@@ -1,6 +1,6 @@
 <%-- 
     Document   : timetable
-    Created on : Mar 18, 2023, 6:28:11 AM
+    Created on : Mar 24, 2023, 1:33:44 PM
     Author     : admin
 --%>
 
@@ -18,13 +18,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
         ${requestScope.fromYear}
         <table border="1px">
             <tr>
                 <td>
                     <form method="post" action="timetable">
-                        ${sessionScopeScope.user.luid} Year <select name="year" onchange="this.form.submit()">
+                         Year <select name="year" onchange="this.form.submit()">
                             <option value="2023" <c:if test="${2023 eq requestScope.year}">selected</c:if>>2023</option>
                             <option value="2022" <c:if test="${2022 eq requestScope.year}">selected</c:if>>2022</option>
                         </select>
@@ -35,7 +34,7 @@
                             </c:forEach>
                         </select>
                             
-                        <input type="hidden" name="lid" value="${sessionScope.acc.lecturer.lid}">
+                        <input type="text" name="sid" value="${sessionScope.acc.student.sid}">
                     </form>
                 <c:forEach items="${requestScope.dates}" var="d">
                     <td> 
@@ -56,7 +55,7 @@
                                     -
                                     <c:if test="${ses.status}">-(attended)</c:if>
                                     <c:if test="${!ses.status}">-
-                                        <a href="takeattend?id=${ses.sesid}">take attend</a>
+                                        (future)
                                     </c:if>
                                 </c:if>
                             </c:forEach>

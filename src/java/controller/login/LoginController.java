@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller.login;
+import dal.StudentDBContext;
 import dal.UserDBContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import model.Lecturer_User;
+import model.Student_User;
 
 /**
  *
@@ -45,16 +47,23 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        StudentDBContext sdb = new StudentDBContext();
         UserDBContext db = new UserDBContext();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         Lecturer_User luser = db.getlu(username,password);
+        Student_User suser =  sdb.getsu(username, password);
         HttpSession session = request.getSession();
         String mess="Access Fail";
         if(luser != null)
         {
             session.setAttribute("acc", luser);
             request.getRequestDispatcher("../view/menu.jsp").forward(request, response);        }
+        else if (suser !=null){
+           session.setAttribute("acc", suser);
+           request.getRequestDispatcher("../view/studentmenu.jsp").forward(request, response);
+        }
+        
         else
         {
             request.setAttribute("mess", mess);

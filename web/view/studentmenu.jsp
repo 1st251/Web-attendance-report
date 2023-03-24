@@ -1,6 +1,6 @@
 <%-- 
-    Document   : menu
-    Created on : Mar 21, 2023, 1:49:37 AM
+    Document   : studentmenu
+    Created on : Mar 24, 2023, 12:40:05 PM
     Author     : admin
 --%>
 
@@ -13,7 +13,7 @@
     </head>
     <body>
         <div>WELCOME ${sessionScope.acc.username}</div><br>
-        <a href="${pageContext.request.contextPath}/lecturer/attendance">Attendance</a><br>
-        <a href="${pageContext.request.contextPath}/lecturer/timetable">TimeTable</a>
+        <a href="${pageContext.request.contextPath}/student/attendance">Attendance</a><br>
+        <a href="${pageContext.request.contextPath}/student/timetable">TimeTable</a>
     </body>
 </html>

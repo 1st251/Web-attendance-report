@@ -15,6 +15,12 @@ import java.util.logging.Logger;
 import model.Attendance;
 import model.Student;
 import model.Attendance;
+import model.Course;
+import model.Group;
+import model.Lecturer;
+import model.Room;
+import model.Session;
+import model.TimeSlot;
 
 /**
  *
@@ -35,7 +41,7 @@ public class AttendanceDBContext extends DBContext<Attendance> {
 
             //PROCESS Attendace records
             for (Attendance att : atts) {
-                if (att.getAid()== 0) //INSERT
+                if (att.getAid() == 0) //INSERT
                 {
                     String sql_insert_att = "INSERT INTO [Attendance]\n"
                             + "           ([sid]\n"
@@ -54,7 +60,7 @@ public class AttendanceDBContext extends DBContext<Attendance> {
                     stm_insert_att.setString(4, att.getDescription());
                     stm_insert_att.executeUpdate();
                     stms.add(stm_insert_att);
-                    
+
                 } else //UPDATE
                 {
                     String sql_update_att = "UPDATE Attendance SET status = ?,description = ? WHERE aid = ?";
@@ -147,6 +153,59 @@ public class AttendanceDBContext extends DBContext<Attendance> {
             }
         }
         return atts;
+    }
+
+    public ArrayList<Attendance> getTimeTableStudent(int sid) {
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        ArrayList<Attendance> list = new ArrayList<>();
+
+        try {
+            String sql = "SELECT s.sid,s.sname,att.aid,ISNULL(att.status,0) as status,att.description FROM Student s \n"
+                    + "inner join [Student_Group] sg on sg.sid=s.sid\n"
+                    + "inner join [Group] g on g.gid=sg.gid\n"
+                    + "inner join Course c on c.cid=g.cid\n"
+                    + "inner join Session ses on ses.gid=g.gid\n"
+                    + "left join Attendance att on att.sessionid=ses.sessionid`\n"
+                    + "WHERE s.sid = ? ";
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, sid);
+            rs = stm.executeQuery();
+//            Group currentGroup = new Group();
+//            currentGroup.setGid(-1);
+            while (rs.next()) {
+                Attendance att = new Attendance();
+                att.setAid(rs.getInt("aid"));
+                att.setStatus(rs.getBoolean("status"));
+                att.setDescription(rs.getString("description"));
+                Student s = new Student();
+                s.setSid(rs.getInt("sid"));
+                s.setName(rs.getString("sname"));
+                att.setStudent(s);
+                list.add(att);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                stm.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return list;
     }
 
     @Override

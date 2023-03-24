@@ -19,7 +19,7 @@
     </head>
     <body>
 <!--        <input type="hidden" name="lid" value="${sessionScope.acc.lecturer.lid}">-->
-<!--       <form action="attendance" method="POST">
+<!--      <form action="attendance" method="POST">
             <input type="text" name="lid" value="${requestScope.lid}">
             <input type="submit" name="Show"> 
         </form>-->
@@ -27,28 +27,18 @@
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>DATE</th>
+                        <th>Student ID</th>
+                        <c:forEach items="${requestScope.sessions}" var="s">
                         <th>SLOT</th>
-                        <th>ROOM</th>
-                        <th>GROUP NAME</th>
-                        <th>ATTENDACE STATUS</th>
+                        </c:forEach>
+                        <th>ATTENDACE</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${requestScope.sessions}" var="s" varStatus="loop">
                     <tr>
-                        <td>${loop.index+1}</td>
-                        <td>
-                        <fmt:formatDate value="${s.date}" pattern="EEEE dd/MM/YY"/>
-                        </td>
-                        <td>${s.timeslot.tid}_(${s.timeslot.description})</td>
-                        <td>${s.room.rname}</td>
-                        <td>${s.group.gname}</td>
-                        <td><c:if test="${s.status == true}">Attended</c:if>
-                            <c:if test="${s.status != true}">Future</c:if>
-                        </td>
+                        
                     </tr>
-                    </c:forEach>
+                    
                 </tbody>
             </table>
    <!--         <div>ABSENT: ${requestScope.absent} ABSENT SO FAR (${requestScope.count} ABSENT ON ${requestScope.countSes} Total)
